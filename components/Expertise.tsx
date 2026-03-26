@@ -3,6 +3,7 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Wrench, Globe, Zap, BarChart3, Bot } from 'lucide-react'
+import DataInMotion from './DataInMotion'
 
 const services = [
   {
@@ -86,37 +87,46 @@ export default function Expertise() {
           </p>
         </motion.div>
 
-        {/* Bento grid */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
-        >
-          {services.map(s => {
-            const Icon = s.icon
-            return (
-              <motion.div
-                key={s.title}
-                variants={item}
-                whileHover={{ scale: 1.02, y: -6 }}
-                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                className={`group relative bg-white border border-slate-100 rounded-2xl p-7 cursor-default shadow-soft hover:shadow-card-hover transition-shadow ${s.span}`}
-              >
-                {/* Gradient accent on hover */}
-                <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${s.gradient} opacity-0 group-hover:opacity-[0.03] transition-opacity duration-500`} />
+        {/* Two-column layout: DataInMotion + Bento grid */}
+        <div className="flex flex-col lg:flex-row gap-8 items-start">
 
-                <div className={`inline-flex w-12 h-12 rounded-xl items-center justify-center mb-5 ${s.iconBg} shadow-sm`}>
-                  <Icon className="w-6 h-6" strokeWidth={1.8} />
-                </div>
-                <h3 className="font-display font-semibold text-[17px] text-slate-900 mb-2 group-hover:text-indigo-700 transition-colors">
-                  {s.title}
-                </h3>
-                <p className="text-slate-500 text-sm leading-relaxed">{s.desc}</p>
-              </motion.div>
-            )
-          })}
-        </motion.div>
+          {/* Left: Data in Motion carousel */}
+          <div className="w-full lg:w-[340px] flex-shrink-0">
+            <DataInMotion />
+          </div>
+
+          {/* Right: Bento grid */}
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate={inView ? 'visible' : 'hidden'}
+            className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-5"
+          >
+            {services.map(s => {
+              const Icon = s.icon
+              return (
+                <motion.div
+                  key={s.title}
+                  variants={item}
+                  whileHover={{ scale: 1.02, y: -6 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  className={`group relative bg-white border border-slate-100 rounded-2xl p-7 cursor-default shadow-soft hover:shadow-card-hover transition-shadow ${s.span}`}
+                >
+                  {/* Gradient accent on hover */}
+                  <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${s.gradient} opacity-0 group-hover:opacity-[0.03] transition-opacity duration-500`} />
+
+                  <div className={`inline-flex w-12 h-12 rounded-xl items-center justify-center mb-5 ${s.iconBg} shadow-sm`}>
+                    <Icon className="w-6 h-6" strokeWidth={1.8} />
+                  </div>
+                  <h3 className="font-display font-semibold text-[17px] text-slate-900 mb-2 group-hover:text-indigo-700 transition-colors">
+                    {s.title}
+                  </h3>
+                  <p className="text-slate-500 text-sm leading-relaxed">{s.desc}</p>
+                </motion.div>
+              )
+            })}
+          </motion.div>
+        </div>
       </div>
     </section>
   )
