@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ShieldCheck, Menu, X } from 'lucide-react'
+import { ShieldCheck, Menu, X, ArrowRight } from 'lucide-react'
 
 const links = [
-  { label: 'Fonctionnalités', href: '#expertise' },
+  { label: 'Fonctionnalites', href: '#expertise' },
   { label: 'Processus',       href: '#processus' },
-  { label: 'Réalisations',    href: '#realisations' },
+  { label: 'Realisations',    href: '#realisations' },
   { label: 'Contact',         href: '#contact' },
 ]
 
@@ -26,9 +26,9 @@ export default function Navbar() {
       initial={{ y: -72 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-100'
+          ? 'glass shadow-soft'
           : 'bg-transparent'
       }`}
     >
@@ -37,7 +37,7 @@ export default function Navbar() {
 
           {/* Logo */}
           <a href="#" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center shadow-md shadow-indigo-200 transition-transform group-hover:scale-110">
+            <div className="w-9 h-9 bg-gradient-to-br from-indigo-600 to-indigo-700 rounded-xl flex items-center justify-center shadow-md shadow-indigo-200 transition-all group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-indigo-300/50">
               <ShieldCheck className="w-5 h-5 text-white" strokeWidth={2.5} />
             </div>
             <span className="font-display font-bold text-[17px] text-slate-900 tracking-tight">
@@ -46,12 +46,12 @@ export default function Navbar() {
           </a>
 
           {/* Nav desktop */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-1">
             {links.map(l => (
               <a
                 key={l.href}
                 href={l.href}
-                className="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors"
+                className="text-sm font-medium text-slate-500 hover:text-indigo-600 transition-colors px-3 py-2 rounded-lg hover:bg-indigo-50/50"
               >
                 {l.label}
               </a>
@@ -65,9 +65,10 @@ export default function Navbar() {
             </a>
             <a
               href="#contact"
-              className="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-md shadow-indigo-200/60 transition-all hover:shadow-indigo-300/70 hover:-translate-y-0.5"
+              className="group bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-md shadow-indigo-200/60 transition-all hover:shadow-lg hover:shadow-indigo-300/70 hover:-translate-y-0.5 flex items-center gap-2"
             >
               Commencer
+              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
             </a>
           </div>
 
@@ -89,7 +90,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden overflow-hidden bg-white border-t border-slate-100"
+            className="md:hidden overflow-hidden glass border-t border-white/20"
           >
             <div className="px-6 py-4 flex flex-col gap-1">
               {links.map(l => (
@@ -105,7 +106,7 @@ export default function Navbar() {
               <a
                 href="#contact"
                 onClick={() => setMobileOpen(false)}
-                className="mt-4 text-center bg-indigo-600 text-white text-sm font-semibold px-5 py-3 rounded-xl"
+                className="mt-4 text-center bg-gradient-to-r from-indigo-600 to-indigo-700 text-white text-sm font-semibold px-5 py-3 rounded-xl"
               >
                 Commencer maintenant
               </a>

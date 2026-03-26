@@ -1,42 +1,46 @@
 'use client'
 
-import { ShieldCheck, Mail } from 'lucide-react'
+import { ShieldCheck, Mail, ArrowRight } from 'lucide-react'
 
 const links = [
-  { label: 'Fonctionnalités', href: '#expertise' },
+  { label: 'Fonctionnalites', href: '#expertise' },
   { label: 'Processus',       href: '#processus' },
-  { label: 'Réalisations',    href: '#realisations' },
+  { label: 'Realisations',    href: '#realisations' },
   { label: 'Contact',         href: '#contact' },
 ]
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-900 text-white">
+    <footer className="relative bg-slate-900 text-white overflow-hidden">
+
+      {/* Subtle gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-900 to-indigo-950/50 pointer-events-none" />
 
       {/* CTA strip */}
-      <div className="border-b border-slate-800">
+      <div className="relative border-b border-slate-800/80">
         <div className="max-w-6xl mx-auto px-6 py-16 flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
-            <h3 className="font-display font-bold text-2xl mb-2">Prêt à digitaliser votre activité ?</h3>
-            <p className="text-slate-400 text-[15px]">L&apos;appel de découverte est gratuit, sans engagement.</p>
+            <h3 className="font-display font-bold text-2xl mb-2">Pret a digitaliser votre activite ?</h3>
+            <p className="text-slate-400 text-[15px]">L&apos;appel de decouverte est gratuit, sans engagement.</p>
           </div>
           <a
             href="#contact"
-            className="flex-shrink-0 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-7 py-3.5 rounded-xl shadow-lg shadow-indigo-900/40 transition-all hover:-translate-y-0.5"
+            className="shine group flex-shrink-0 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white font-semibold px-7 py-3.5 rounded-xl shadow-lg shadow-indigo-900/40 transition-all hover:-translate-y-0.5 flex items-center gap-2"
           >
-            Demander un devis →
+            Demander un devis
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </a>
         </div>
       </div>
 
       {/* Footer bas */}
-      <div className="max-w-6xl mx-auto px-6 py-10">
+      <div className="relative max-w-6xl mx-auto px-6 py-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
 
           {/* Logo + tagline */}
           <div>
             <div className="flex items-center gap-2.5 mb-2">
-              <div className="w-7 h-7 bg-indigo-600 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-900/30">
                 <ShieldCheck className="w-4 h-4 text-white" strokeWidth={2.5} />
               </div>
               <span className="font-display font-bold text-[16px]">Smart-OS</span>
@@ -55,11 +59,11 @@ export default function Footer() {
 
           {/* Email + copyright */}
           <div className="text-right text-slate-500 text-[13px]">
-            <a href="mailto:contact@smart-os.fr" className="flex items-center gap-1.5 hover:text-white transition-colors mb-1.5 justify-end">
+            <a href="mailto:contact@smart-os.fr" className="flex items-center gap-1.5 hover:text-indigo-400 transition-colors mb-1.5 justify-end">
               <Mail className="w-3.5 h-3.5" />
               contact@smart-os.fr
             </a>
-            <p>© 2025 SMART-OS — Tous droits réservés</p>
+            <p>2025 SMART-OS — Tous droits reserves</p>
           </div>
         </div>
       </div>

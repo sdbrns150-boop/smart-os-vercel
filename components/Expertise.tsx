@@ -6,33 +6,43 @@ import { Wrench, Globe, Zap, BarChart3, Bot } from 'lucide-react'
 
 const services = [
   {
-    icon: Wrench, color: 'bg-indigo-50 text-indigo-600',
+    icon: Wrench,
+    gradient: 'from-indigo-500 to-indigo-700',
+    iconBg: 'bg-gradient-to-br from-indigo-50 to-indigo-100 text-indigo-600',
     title: 'Outils internes sur-mesure',
-    desc: 'CRM maison, back-office, outils RH ou opérationnels — conçus exactement pour votre process, pas pour 1000 clients génériques.',
+    desc: 'CRM maison, back-office, outils RH ou operationnels — concus exactement pour votre process, pas pour 1000 clients generiques.',
     span: 'lg:col-span-2',
   },
   {
-    icon: Globe, color: 'bg-violet-50 text-violet-600',
+    icon: Globe,
+    gradient: 'from-violet-500 to-purple-700',
+    iconBg: 'bg-gradient-to-br from-violet-50 to-purple-50 text-violet-600',
     title: 'Portails clients & extranets',
-    desc: 'Offrez à vos clients un espace sécurisé : suivi, documents, échanges centralisés.',
+    desc: 'Offrez a vos clients un espace securise : suivi, documents, echanges centralises.',
     span: '',
   },
   {
-    icon: Zap, color: 'bg-amber-50 text-amber-600',
+    icon: Zap,
+    gradient: 'from-amber-400 to-orange-600',
+    iconBg: 'bg-gradient-to-br from-amber-50 to-orange-50 text-amber-600',
     title: 'Automatisation de workflows',
-    desc: 'Réduisez les tâches répétitives. On connecte vos outils et automatise les flux.',
+    desc: 'Reduisez les taches repetitives. On connecte vos outils et automatise les flux.',
     span: '',
   },
   {
-    icon: BarChart3, color: 'bg-emerald-50 text-emerald-600',
+    icon: BarChart3,
+    gradient: 'from-emerald-500 to-teal-700',
+    iconBg: 'bg-gradient-to-br from-emerald-50 to-teal-50 text-emerald-600',
     title: 'Dashboards & reporting',
-    desc: 'Visualisez vos données métier en temps réel. Exports automatisés, alertes intelligentes.',
+    desc: 'Visualisez vos donnees metier en temps reel. Exports automatises, alertes intelligentes.',
     span: '',
   },
   {
-    icon: Bot, color: 'bg-pink-50 text-pink-600',
-    title: 'Intégration IA & agents',
-    desc: 'Agents intelligents, traitement de documents, assistants internes — l\'IA appliquée à vos vrais cas d\'usage.',
+    icon: Bot,
+    gradient: 'from-pink-500 to-rose-700',
+    iconBg: 'bg-gradient-to-br from-pink-50 to-rose-50 text-pink-600',
+    title: 'Integration IA & agents',
+    desc: "Agents intelligents, traitement de documents, assistants internes — l'IA appliquee a vos vrais cas d'usage.",
     span: '',
   },
 ]
@@ -51,8 +61,11 @@ export default function Expertise() {
   const inView  = useInView(ref, { once: true, amount: 0.2 })
 
   return (
-    <section id="expertise" className="py-28 bg-white">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="expertise" className="relative py-28 bg-white overflow-hidden">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 dot-pattern-light opacity-40" />
+
+      <div className="relative max-w-6xl mx-auto px-6">
 
         {/* Header */}
         <motion.div
@@ -62,14 +75,14 @@ export default function Expertise() {
           transition={{ duration: 0.6 }}
           className="mb-14"
         >
-          <span className="text-xs font-bold tracking-widest uppercase text-indigo-600 mb-3 block">
+          <span className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-indigo-600 mb-3 bg-indigo-50 px-3 py-1 rounded-full">
             Nos expertises
           </span>
           <h2 className="font-display font-bold text-4xl text-slate-900 mb-4">
-            Fonctionnalités clés
+            Fonctionnalites cles
           </h2>
           <p className="text-slate-500 text-lg max-w-xl">
-            Tout ce dont vous avez besoin pour digitaliser votre activité, sans compromis.
+            Tout ce dont vous avez besoin pour digitaliser votre activite, sans compromis.
           </p>
         </motion.div>
 
@@ -86,14 +99,17 @@ export default function Expertise() {
               <motion.div
                 key={s.title}
                 variants={item}
-                whileHover={{ scale: 1.02, y: -4, boxShadow: '0 16px 40px rgba(0,0,0,0.10)' }}
+                whileHover={{ scale: 1.02, y: -6 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                className={`group bg-white border border-slate-100 rounded-2xl p-7 cursor-default shadow-sm ${s.span}`}
+                className={`group relative bg-white border border-slate-100 rounded-2xl p-7 cursor-default shadow-soft hover:shadow-card-hover transition-shadow ${s.span}`}
               >
-                <div className={`inline-flex w-12 h-12 rounded-xl items-center justify-center mb-5 ${s.color}`}>
+                {/* Gradient accent on hover */}
+                <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${s.gradient} opacity-0 group-hover:opacity-[0.03] transition-opacity duration-500`} />
+
+                <div className={`inline-flex w-12 h-12 rounded-xl items-center justify-center mb-5 ${s.iconBg} shadow-sm`}>
                   <Icon className="w-6 h-6" strokeWidth={1.8} />
                 </div>
-                <h3 className="font-display font-semibold text-[17px] text-slate-900 mb-2">
+                <h3 className="font-display font-semibold text-[17px] text-slate-900 mb-2 group-hover:text-indigo-700 transition-colors">
                   {s.title}
                 </h3>
                 <p className="text-slate-500 text-sm leading-relaxed">{s.desc}</p>

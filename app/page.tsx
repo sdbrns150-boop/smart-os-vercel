@@ -1,5 +1,6 @@
 import Navbar         from '@/components/Navbar'
 import Hero           from '@/components/Hero'
+import TrustBanner    from '@/components/TrustBanner'
 import Expertise      from '@/components/Expertise'
 import Processus      from '@/components/Processus'
 import Realisations   from '@/components/Realisations'
@@ -12,6 +13,7 @@ export default function Home() {
     <main>
       <Navbar />
       <Hero />
+      <TrustBanner />
       <Expertise />
       <Processus />
       <Realisations />
