@@ -241,7 +241,7 @@ export default function DataInMotion() {
       transition={{ duration: 0.7, ease: 'easeOut' }}
       className="relative w-full max-w-[360px] mx-auto rounded-3xl p-6 overflow-hidden"
       style={{
-        background: 'linear-gradient(180deg, #f5f3ff 0%, #eef0fb 40%, #e8e5f5 100%)',
+        background: 'linear-gradient(180deg, #ffffff 0%, #faf9ff 40%, #f5f3ff 100%)',
       }}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
