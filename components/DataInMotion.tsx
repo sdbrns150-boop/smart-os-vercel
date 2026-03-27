@@ -242,24 +242,23 @@ const panels = [
 ]
 
 /* ──────────────────────────────────────────────
-   3D Tilted Ribbon — blends into page
+   3D Tilted Ribbon — full loop visible, no clipping
    ────────────────────────────────────────────── */
 
 export default function DataInMotion() {
   const [angle, setAngle] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true, amount: 0.3 })
+  const inView = useInView(ref, { once: true, amount: 0.2 })
   const rafRef = useRef<number>(0)
   const lastTimeRef = useRef<number>(0)
 
   const count = panels.length
   const step = 360 / count
-  const radius = 200
+  const radius = 220
 
-  // Card dimensions matching reference (wider, shorter — landscape)
-  const cardW = 155
-  const cardH = 110
+  const cardW = 160
+  const cardH = 115
 
   const animate = useCallback((time: number) => {
     if (!lastTimeRef.current) lastTimeRef.current = time
@@ -277,53 +276,29 @@ export default function DataInMotion() {
     return () => cancelAnimationFrame(rafRef.current)
   }, [inView, animate])
 
-  const normalizedAngle = (((-angle % 360) + 360) % 360)
-  const activeIndex = Math.round(normalizedAngle / step) % count
-
   return (
     <motion.div
       ref={ref}
       initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7, ease: 'easeOut' }}
-      className="relative w-full max-w-[400px] mx-auto"
+      className="relative w-full max-w-[420px] mx-auto"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {/* Header — no card, blends with page */}
-      <div className="mb-1">
-        <h3 className="font-display font-bold text-lg text-slate-900">Data in Motion</h3>
-        <p className="text-slate-400 text-xs">Insights at a glance</p>
-      </div>
-
-      {/* Dots */}
-      <div className="flex gap-1 justify-end mb-2">
-        {panels.map((_, i) => (
-          <div
-            key={i}
-            className="w-[5px] h-[5px] rounded-full transition-all duration-500"
-            style={{
-              backgroundColor: i === activeIndex ? '#6366f1' : '#d4d0e0',
-              transform: i === activeIndex ? 'scale(1.4)' : 'scale(1)',
-            }}
-          />
-        ))}
-      </div>
-
-      {/* 3D Tilted Carousel — ribbon effect */}
+      {/* 3D Carousel — no overflow clip, full loop visible */}
       <div
-        className="relative mx-auto"
         style={{
           perspective: '700px',
-          perspectiveOrigin: '50% 35%',
-          height: '210px',
+          perspectiveOrigin: '50% 40%',
+          height: '320px',
         }}
       >
         <div
           className="absolute left-1/2 top-1/2"
           style={{
             transformStyle: 'preserve-3d',
-            transform: `translateX(-50%) translateY(-60%) rotateX(16deg) rotateZ(-2deg) rotateY(${angle}deg)`,
+            transform: `translateX(-50%) translateY(-55%) rotateX(18deg) rotateZ(-2deg) rotateY(${angle}deg)`,
             width: `${cardW}px`,
             height: `${cardH}px`,
           }}
@@ -338,16 +313,15 @@ export default function DataInMotion() {
                   width: `${cardW}px`,
                   height: `${cardH}px`,
                   transform: `rotateY(${a}deg) translateZ(${radius}px)`,
-                  backfaceVisibility: 'hidden',
                 }}
               >
                 <div
                   className="w-full h-full rounded-xl"
                   style={{
-                    background: 'rgba(255, 255, 255, 0.92)',
-                    backdropFilter: 'blur(12px)',
-                    border: '1px solid rgba(230, 225, 245, 0.6)',
-                    boxShadow: '0 4px 16px rgba(100, 80, 160, 0.06), 0 1px 3px rgba(100, 80, 160, 0.04)',
+                    background: 'rgba(255, 255, 255, 0.88)',
+                    backdropFilter: 'blur(10px)',
+                    border: '1px solid rgba(230, 225, 245, 0.5)',
+                    boxShadow: '0 4px 20px rgba(100, 80, 160, 0.07), 0 1px 4px rgba(100, 80, 160, 0.04)',
                   }}
                 >
                   <Panel />
@@ -356,22 +330,6 @@ export default function DataInMotion() {
             )
           })}
         </div>
-      </div>
-
-      {/* Footer — blends with page */}
-      <div className="mt-1 flex items-end justify-between">
-        <div>
-          <p className="text-[12px] font-medium text-slate-400">Dashboards and</p>
-          <p className="text-[12px] font-medium text-slate-400">
-            Interfaces. <span className="text-indigo-600 font-semibold">Connected.</span>
-          </p>
-        </div>
-        <button
-          onClick={() => setAngle(prev => prev - step)}
-          className="flex items-center gap-1 text-xs font-medium text-slate-400 border border-slate-200 bg-white/80 rounded-full px-3 py-1 hover:border-indigo-300 hover:text-indigo-600 transition-all duration-200"
-        >
-          Next <span>→</span>
-        </button>
       </div>
     </motion.div>
   )
